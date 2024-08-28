@@ -1,0 +1,24 @@
+package edu.kh.basic;
+
+
+// 한 줄 주석
+/*
+ * 범위 주석
+ */
+
+// class : 자바 코드가 작성되는 영역
+public class JavaBasic {
+	
+	// 'main' 입력 후 ctrl + space -> 맨 위에 main method 자동완성
+	// 면접 때 기본적인 것으로 묻기에 자동완성은 자제
+	public static void main(String[] arge) {
+		// main method(메서드) : 자마 애플리케이션(프로그램)을 실행하기 위해
+		// 반드시 필요한 메서드
+		
+		// 콘솔창에 출력 메서드
+		System.out.println("Hellow, World!!");
+		
+		
+		
+	}
+}
