@@ -29,8 +29,10 @@ public class VariableExample1 {
 		
 		System.out.println(2 * pi * r); // 원의 둘레
 		System.out.println(pi * r * r); // 원의 넓의
-		System.out.println(pi * r * r * h); // 워
+		System.out.println(pi * r * r * h); // 원기둥의 부피
 		System.out.println(4 * pi * r * r); // 구의 겉넓이
+		
+		
 		
 	}
 }
