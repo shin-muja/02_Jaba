@@ -71,6 +71,7 @@ public class OperatorPratice {
 		float tem = total / 3f;
 		
 		System.out.printf("\n합계 : %d\n평균 : %.1f", total, tem);
+		System.out.println("확인용");
 	}
 
 
