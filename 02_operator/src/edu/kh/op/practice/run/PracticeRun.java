@@ -20,9 +20,9 @@ public class PracticeRun {
 		
 		// op3.problem1();
 		
-		// op3.problem2();
+		op3.problem2();
 
-		op3.problem3();
+		// op3.problem3();
 		
 	}
 }

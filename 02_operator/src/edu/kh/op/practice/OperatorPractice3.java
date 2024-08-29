@@ -22,6 +22,7 @@ public class OperatorPractice3 {
 	}
 	
 	public void problem2() {
+		
 		int credit = 0;
 		int credit50 = 0;
 		int credit10 = 0;
@@ -34,16 +35,16 @@ public class OperatorPractice3 {
 		credit = sc.nextInt();
 		
 		credit50 = credit / 50000;
-		credit = credit % 50000;
+		credit %= 50000;
 		
 		credit10 = credit / 10000;
-		credit = credit % 10000;
+		credit %= 10000;
 		
 		credit5 = credit / 5000;
-		credit = credit % 5000;
+		credit %= 5000;
 		
 		credit1 = credit / 1000;
-		credit = credit % 1000;
+		credit %= 1000;
 		
 		System.out.printf("\n50000원 : %d\n10000원 : %d\n5000원 : %d\n1000원 : %d\n"
 				, credit50, credit10, credit5, credit1);
