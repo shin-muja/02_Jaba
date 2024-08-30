@@ -1,4 +1,4 @@
-package edu.kh.contol.condition;
+package edu.kh.control.condition;
 
 public class ConditionRun {
 	public static void main(String[] args) { // 실행용 class

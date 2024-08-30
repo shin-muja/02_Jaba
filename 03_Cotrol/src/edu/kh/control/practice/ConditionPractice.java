@@ -1,4 +1,4 @@
-package edu.kh.contol.practice;
+package edu.kh.control.practice;
 
 import java.util.Scanner;
 
@@ -108,7 +108,6 @@ public class ConditionPractice {
 	public void practice5() {
 		
 		String str = "";
-		String result = "";
 		
 		int input;
 		
@@ -130,20 +129,20 @@ public class ConditionPractice {
 		System.out.print("출석 횟수 : ");
 		input = sc.nextInt();
 		
-		double run = input * 0.2;
+		double run = input;
 		
 		double total = middle + last + report + run;
 		
 		System.out.println("================= 결과 =================");
 		
-		str += "중간 고사 점수(20) : " + String.format("%.1f", middle);
-		str += "\n기말 고사 점수(30) : " + String.format("%.1f", last);
-		str += "\n과제      점수(30) : " + String.format("%.1f", report);
-		str += "\n출석      점수(20) :" + String.format("%.1f", run);
-		str += "\n총점 : " + String.format("%.1f", total);
+		str += "중간 고사 점수(20) : " + middle;
+		str += "\n기말 고사 점수(30) : " + last;
+		str += "\n과제      점수(30) : " + report;
+		str += "\n출석      점수(20) : " + run;
+		str += "\n총점 : " +  total;
 		
-		if ( run <= (20 *0.3)) {
-			str = "Fail [출석 횟수 부족 (" +  input +"/20)]";
+		if ( run <= (20 * 0.7)) {
+			str = "Fail [출석 횟수 부족 (" +  (int)run +"/20)]";
 		} else if ( total >= 70 ) {
 			str += "\nPASS";
 		} else {
@@ -153,4 +152,6 @@ public class ConditionPractice {
 		System.out.println(str);
 		
 	}
+
+
 }

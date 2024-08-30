@@ -1,4 +1,4 @@
-package edu.kh.contol.practice;
+package edu.kh.control.practice;
 
 public class Run {
 	public static void main(String[] args) {
