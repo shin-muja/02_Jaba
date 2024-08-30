@@ -41,8 +41,17 @@ public class OperatorPratice {
 		System.out.print("번호 정수만 : ");
 		number = sc.nextInt();
 		
+		// nextLine(); 입력버퍼 비우는 일 (개행문자 비우기)
+		
 		System.out.print("성별(남학생/여학생) : ");
 		gender = sc.next();
+		// next() : 문자열 : 공백X
+		// nextLine() : 문자열 - 띄어쓰기 , 공백 O
+		// 위 nextInt() 입력 후 \n가 입력버퍼로 남아있어 바로 nextLine() 사용 시
+		// \n 개행문자가 바로 출력후 nextLine() 으로 입력된다
+		// nextInt(), nexDouble()등 다음으로 next()가 아닌 nextLine() 사용하고 싶을시
+		// 위처럼 nextLine()으로 미리 개행문자를 받아줘야 한다.
+		
 		
 		System.out.print("성적(소수점 아래 둘째 자리까지) : ");
 		value = sc.nextDouble();
