@@ -26,7 +26,7 @@ public class People { // 국민(사람) 클래스
 	// ** 데이터 직접 접근 제한 **
 	// public(공공의) -> private(사적인, 개인적인) 변경
 	// [접근제한자] 자료형 변수명;
-		
+
 	private String name;
 	private char gender;
 	private String pNo; // "123456-1234567"

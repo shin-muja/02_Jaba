@@ -19,4 +19,29 @@ public class TestService {
 		dog.printSwim();
 		dog.printWing();
 	}
+	
+	public void test() {
+		int arr[] = {1, 1, 2, 2};
+		int max = 0;
+		int answer = 0;
+		
+		for( int i = 0 ; i < arr.length ; i++) {
+			int count = 0;
+			for(int j = 0 ; j < i ; j++) {
+				if(arr[i] == arr[j]) count++;
+			}
+			if( max < count) {
+				max = count;
+				answer = arr[i];
+			}
+			
+			if(max == count &&answer != arr[i]) {
+				answer = -1;
+			}
+		}
+		
+		
+		System.out.println(answer);
+		
+	}
 }

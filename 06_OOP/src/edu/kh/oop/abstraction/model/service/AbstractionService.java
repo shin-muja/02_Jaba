@@ -69,5 +69,6 @@ public class AbstractionService {
 		System.out.println(p1.getpNo());
 		System.out.println(p1.getPhone());
 		System.out.println(p1.getAge());
+		p1.vote();
 	}
 }

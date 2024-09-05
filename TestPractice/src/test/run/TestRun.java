@@ -6,6 +6,7 @@ public class TestRun {
 	public static void main(String[] args) {
 		TestService run = new TestService();
 		
-		run.profile();
+		//run.profile();
+		run.test();
 	}
 }
