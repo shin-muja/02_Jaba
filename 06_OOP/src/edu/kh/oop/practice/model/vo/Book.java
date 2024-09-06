@@ -63,6 +63,10 @@ public class Book {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+	
+	public int getSalePrice() {
+		return price - (int)(price * discountRate);
+	}
 
 	
 	/*
@@ -101,7 +105,7 @@ public class Book {
 	 * 메서드의 '호출' 이란 : 메서드에 정의된 함수를 그 위치에서 연산시키기 위한 행위
 	 * 						같은 클래스내에서는 메서드명(); 으로 간단한 하게 불러올수 있고
 	 * 						클래스 위부에서 호출시 new 연산자를 통해 인스턴스화 한다음
-	 * 						변수명.메서드명(); 으로 호출할 수 있다.						
+	 * 						변수명.메서드명(); 으로 호출할 수 있다.
 	 * 
 	 * return : 해당 예약어 작동 시 뒤 작동할 내용이 있더라도 호출한 곳으로 돌아가는 예약어
 	 * 			반환할 값이 있다면 메소드의 반환형에 맞는 값을 가지고 호출한곳으로 돌아감

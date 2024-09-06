@@ -12,20 +12,16 @@ public class Hero {
 	
 	public Hero(String nickname, String job, int hp, int mp, int level, double exp) {
 		
-		System.out.println("============캐릭터 생성============");
-		
 		this.nickname = nickname;
 		this.job = job;
 		this.hp = hp;
 		this.mp = mp;
 		this.level = level;
 		this.exp = exp;
-		
-		System.out.println(this.job + "직업으로 '" + this.nickname + "'님이 생성되었습니다");
-		System.out.println("현재 레벨 : " + this.level);
-		System.out.println("현재 hp : " + this.hp);
-		System.out.println("현재 mp : " + this.mp);
-		System.out.println("현재 경험치 : " + this.exp);
+
+		System.out.println("============캐릭터 생성============");
+		System.out.println(job + "직업으로 '" + nickname + "'님이 생성되었습니다");
+		System.out.printf("현재 레벨 : %d \n현재 hp : %d \n현재 mp : %d \n현재 exp : %.1f \n", level, hp ,mp,exp);
 	}
 	
 	public void attack(double exp) {
@@ -36,7 +32,7 @@ public class Hero {
 				nickname, (double)((level-1)*300)+ this.exp );
 		
 		if(exp >= 300) {
-			this.level++;
+			level++;
 			this.exp -= 300;
 			System.out.println("레벨이 올랐습니다!! 현재 레벨 : " + level);
 		}
@@ -54,13 +50,21 @@ public class Hero {
 	
 	
 	
+	public double getExp() {
+		return exp;
+	}
+
+	public void setExp(double exp) {
+		this.exp = exp;
+	}
+
 	@Override
 	public String toString() {
 		return "======'" + nickname + "'님의 정보======" + 
 				"\n-현재 레벨 : " + level + "\n"
 				+ "-현재 hp : " + hp + "\n"
 				+ "-현재 mp : " + mp + "\n"
-				+ "-현재 exp : " + (((level-1) * 300) + exp);
+				+ "-현재 exp : %.1f\n\n" ;
 	}
 	
 	public String getNickName() {
