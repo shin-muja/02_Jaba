@@ -6,15 +6,19 @@ public class TestRun {
 	public static void main(String[] args) {
 		TestService run = new TestService();
 		
-		// run.profile();
-		// run.test();
+		String my_string = "AAAaaaZZZzzz";
+		String result = "";
 		
-		char a = 'a';
-		char A = 'A';
-		char Z= 'Z';
 		
-		if( A == 65) System.out.println("같다");
+		for(int i = 0; i < my_string.length() ; i++ ) {
+
+			if( (int)my_string.charAt(i) >= 65 && (int)my_string.charAt(i) <= 90) {
+				result += my_string.toLowerCase().charAt(i);
+			}
+            
+        }
 		
-		System.out.println((int)a+ "\n"+ (int)A + "\n" + (int)Z);
+		
+		System.out.println(result);
 	}
 }

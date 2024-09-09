@@ -1,5 +1,6 @@
 package ehu.kh.oop.method.model.service;
 
+import java.nio.file.spi.FileSystemProvider;
 import java.util.Scanner;
 import ehu.kh.oop.method.model.vo.Member;
 
@@ -36,8 +37,11 @@ public class MemberService {
 			
 			case 1 : System.out.println(signUp()); break;
 			case 2 : System.out.println(login()); break;
-			case 3 : System.out.println(loginCheck()); break;
-			case 4 : /*수정*/ break;
+			case 3 : System.out.println(selectMember()); break;
+			case 4 : 
+				int result = updateMember();
+				System.out.println(updateMemberPrint(result));
+				break;
 			case 0 : System.out.println("프로그램 종료"); break;
 				
 			default : System.out.println("잘못 입력하셨습니다. 메뉴에 있는 번호만 입력해주세요"); break;
@@ -131,21 +135,75 @@ public class MemberService {
 	// 로그인했으면? 현재 로그인한 사람의 정보를 저장하고 있는 객체에서
 	// 정보 꺼내오기 ( 이름, 아이디, 나이)
 	// 2. 로그인 안 했으면? 로그인 후 이용해라...
-	public String loginCheck() {
+	public String selectMember() {
 		
+		System.out.println("\n*****회원 정보 조회 *****");
+		
+		// 1) 로그인 여부확인
+		// 로그인 안 했을 때 "로그인 후 이용해주세요"
 		if(loginMember == null ) {
-			return "로그인 부터 진행해주세요";
+			return "로그인 후 이용해주세요";
+			// return : 현재 메서드를 종료하고 한수를 호출한 쪽으로 되돌아가는 것
+			// return 값 : 현재 메서드를 종료하고, 함수를 호출한 쪽으로 값을 가지고 되돌아가는 것
 		}
 		
-		return loginMember.toString();
+		// 2) 로그인이 되어있는 경우
+		// 회원 정보를 출력할 문자열을 만들어서 반환
+		// 이름, 아이디, 나이(비밀번호 제외)
+		
+		String str = "이름 : " + loginMember.getMemberName();
+		str += "\n아이디 : " + loginMember.getMemberId();
+		str	+= "\n나이 : " + loginMember.getMemberAge() + "세\n";
+		
+		return str;
 	}
 	
 	// 회원정보 수정 기능
+	public int updateMember() {
+		System.out.println("\n*****회원 정보 수정*****");
+		
+		// 1) 로그인 여부 판별
+		// 로그인이 되어있지 않으면 -1 반환
+		if( loginMember == null) {
+			return -1;
+		}
+		
+		// 2) 로그인이 되어있을 때
+		// 2-1) 수정할 회원 정보 입력 받기 (이름, 나이)
+		System.out.print("수정할 이름 입력 : ");
+		String inputName = sc.next();
+		
+		System.out.print("수정할 나이 입력 : ");
+		int inputAge = sc.nextInt();
+				
+		// 2-1) 비밀ㅁ번호를 입력받아서 로그인한 회원의 비밀번호와 일치하는지 확인
+		System.out.print("비밀번호 입력 : ");
+		String inputPw = sc.next();
+		
+		if( inputPw.equals(loginMember.getMemberPw())) {
+			// -> 비밀번호가 일치하는 경우, 로그인한 회원의 이름과 나이 정보를
+			//    입력받은 값으로 변경 후 1 반환
+			loginMember.setMemberName(inputName);
+			loginMember.setMemberAge(inputAge);
+			
+			return 1;
+		} else {
+			// -> 비밀번호가 다를 경우 0 반환
+			return 0;
+		}	
+	}
 	
-	
-	
-	
-	
-	
-	
+	public String updateMemberPrint(int result) {
+		
+		switch (result) {
+		case -1 : return "로그인 후 이용바람"; 
+		
+		case 0 : return "회원 정보 수정 실패 (비밀번호 불일치)"; 
+		
+		case 1 : return "회원 정보가 수정되었습니다"; 
+		
+		default : return "오류 발생 문의해주세요";
+		}
+		
+	}
 }

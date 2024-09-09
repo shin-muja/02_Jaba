@@ -37,13 +37,7 @@ public class Member { // 속성 + 기능
 		return memberId;
 	}
 
-	@Override
-	public String toString() {
-		return 	"************회원정보 조회************" +
-				"아이디 : " + memberId + "\n" + 
-				"이름 : " + memberName + "\n" +
-				"나이 : " + memberAge +"\n";
-	}
+	
 
 	public void setMemberId(String memberId) {
 		this.memberId = memberId;
