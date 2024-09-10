@@ -4,21 +4,15 @@ import test.model.service.TestService;
 
 public class TestRun {
 	public static void main(String[] args) {
-		TestService run = new TestService();
-		
-		String my_string = "AAAaaaZZZzzz";
+
+		int age  = 23;
+
 		String result = "";
 		
+		result += (char)(age/100 + 'a');
 		
-		for(int i = 0; i < my_string.length() ; i++ ) {
+		result += (char)(age/10 + 'a');
 
-			if( (int)my_string.charAt(i) >= 65 && (int)my_string.charAt(i) <= 90) {
-				result += my_string.toLowerCase().charAt(i);
-			}
-            
-        }
-		
-		
 		System.out.println(result);
 	}
 }

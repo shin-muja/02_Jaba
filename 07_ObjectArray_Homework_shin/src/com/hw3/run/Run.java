@@ -1,5 +1,12 @@
 package com.hw3.run;
 
-public class Run {
+import com.hw3.controller.ProductController;
 
+public class Run {
+	public static void main(String[] args) {
+		ProductController proCon = new ProductController();
+		
+		proCon.mainMenu();
+		
+	}
 }
