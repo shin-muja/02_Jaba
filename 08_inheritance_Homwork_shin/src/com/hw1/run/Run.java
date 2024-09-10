@@ -89,6 +89,10 @@ public class Run {
 		System.out.println("======================================================================");
 		
 		for(Employee emp : emps) {
+			
+			// 만약에 emp가 null이면 반복 중지
+			if(emp == null) break;
+			
 			System.out.println(emp.information());
 		}
 		
