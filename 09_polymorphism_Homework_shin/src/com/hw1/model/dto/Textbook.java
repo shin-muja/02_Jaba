@@ -5,7 +5,7 @@ public class Textbook extends Book {
 	private String subject;
 	
 	@Override
-	public void displyInfo() {
+	public void displayInfo() {
 		// TODO Auto-generated method stub
 		System.out.printf("[전문서적] 제목 : %s / 저자 : %s / 과목 : %s\n", getTitle() , getAuthor(), subject);
 		
@@ -19,7 +19,7 @@ public class Textbook extends Book {
 		super(title, author);
 		this.subject = subject;
 		
-		displyInfo();
+		displayInfo();
 	}
 
 	public String getSubject() {

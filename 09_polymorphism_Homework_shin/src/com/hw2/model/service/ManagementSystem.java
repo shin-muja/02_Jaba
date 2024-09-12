@@ -2,13 +2,15 @@ package com.hw2.model.service;
 
 import com.hw2.model.dto.Person;
 
-public abstract class ManagementSystem {
+public interface ManagementSystem {
 
-	public abstract void addPerson(Person person);
+	void addPerson(Person person);
 	
-	public abstract void removePerson(String id);
+	abstract void removePerson(String id);
 	
-	public abstract void displayPersons();
+	public void displayPersons();
+	
+	// public abstract void == void == abstract void == public void 묵시적으로 다 같은 뜻 /  반환형은 있어야함
 	
 
 }

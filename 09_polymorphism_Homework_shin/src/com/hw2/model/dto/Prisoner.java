@@ -10,8 +10,7 @@ public class Prisoner extends Person{
 
 	@Override
 	public String getInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return String.format("ID : %s , 이름 : %s , 죄목 : %s\n", id, name, crime);
 	}
 
 	public String getCrime() {
@@ -22,8 +21,5 @@ public class Prisoner extends Person{
 		this.crime = crime;
 	}
 
-	public String toString() {
-		return "ID : " + this.id + " , 이름 : " + this.name + " , 죄목 : " + crime + "\n";
-	}
 	
 }

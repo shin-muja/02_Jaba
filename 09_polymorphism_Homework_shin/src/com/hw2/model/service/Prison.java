@@ -3,7 +3,7 @@ package com.hw2.model.service;
 import com.hw2.model.dto.Person;
 import com.hw2.model.dto.Prisoner;
 
-public class Prison extends ManagementSystem{
+public class Prison implements ManagementSystem{
 	private Prisoner[] prisoners;
 	private int prisonerCount;
 	
@@ -16,16 +16,21 @@ public class Prison extends ManagementSystem{
 	@Override
 	public void addPerson(Person person) {
 		
-		if(prisoners.length >= prisonerCount) {
+		if(person instanceof Prisoner && prisonerCount < prisoners.length ) {
+			/*
 			int x = prisonerCount;
 			
 			prisoners[x] = (Prisoner) person;
 			
-			System.out.print("수감자가 추가되었습니다 - " + prisoners[x].toString());
+			System.out.print("수감자가 추가되었습니다 - " + prisoners[x].getInfo());
 			
 			prisonerCount++;
+			*/
+			
+			prisoners[prisonerCount++] = (Prisoner) person;
+			System.out.print("수감자가 추가되었습니다 - " + person.getInfo());
 		} else {
-			System.out.println("공간이 없습니다.");
+			System.out.println("더 이상 수용될 공간이 없습니다.");
 		}
 		
 	}
@@ -35,38 +40,69 @@ public class Prison extends ManagementSystem{
 		// TODO Auto-generated method stub
 		for( int i = 0 ; i < prisonerCount; i++) {
 			if( prisoners[i].getId().equals(id)) {
-				System.out.print("수감자가 삭제되었습니다 - " + prisoners[i].toString());
+				System.out.print("수감자가 삭제되었습니다 - " + prisoners[i].getInfo());
 				
 				prisoners[i] = null;
-				break;
+				
+				for( int j = i ; j < prisonerCount - 1 ; j++ ) {
+					prisoners[j] = prisoners[j + 1];
+				}
+				prisoners[--prisonerCount] = null;
+				return;
 			}
 		}
 		
-		for( int i = 0 ; i < prisonerCount; i++) {
+		System.out.println("ID : " + id + "인 수감자는 없습니다.");
+		
+		/*
+		label:
+		for( int i = 0 ; i < prisoners.length; i++) {
 			if( prisoners[i] == null) {
-				for(int j = i + 1 ; j < prisonerCount ; j++) {
-					if( prisoners[i] != null ) {
+				
+				for(int j = i + 1 ; j < prisoners.length ; j++) {
+					
+					if( prisoners[j] != null ) {
 						prisoners[i] = prisoners[j];
 						prisoners[j] = null;
 						
 						prisonerCount = i + 1;
 						break;	
 					}
+					
+					if( j == prisoners.length -1 && prisoners[j] == null) { 
+						prisonerCount = i;
+						break label;
+					}
 				}
-			}
-		}
+			} 
+		}*/
+		
 	}
 
 	@Override
 	public void displayPersons() {
 		System.out.println("전체 수감자 명단 : ");
 
-		for( Prisoner i : prisoners) {
-			if( i == null ) break;
-		
-			System.out.print(i.toString());
+		for(int i = 0; i < prisonerCount ; i++) {
+			System.out.print(prisoners[i].getInfo());
 		}
 		
+	}
+
+	public Prisoner[] getPrisoners() {
+		return prisoners;
+	}
+
+	public void setPrisoners(Prisoner[] prisoners) {
+		this.prisoners = prisoners;
+	}
+
+	public int getPrisonerCount() {
+		return prisonerCount;
+	}
+
+	public void setPrisonerCount(int prisonerCount) {
+		this.prisonerCount = prisonerCount;
 	}
 	
 	

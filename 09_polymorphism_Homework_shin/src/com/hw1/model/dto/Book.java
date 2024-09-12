@@ -13,7 +13,7 @@ public abstract class Book {
 		this.author = author;
 	}
 	
-	public abstract void displyInfo();
+	public abstract void displayInfo();
 
 	public String getTitle() {
 		return title;

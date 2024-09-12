@@ -11,11 +11,11 @@ public class Poetry extends Book{
 		super(title, author);
 		this.numberOfPoems = numberOfPoems;
 		
-		displyInfo();
+		displayInfo();
 	}
 
 	@Override
-	public void displyInfo() {
+	public void displayInfo() {
 		// TODO Auto-generated method stub
 		System.out.printf("[시집] 제목 : %s / 저자 : %s / 과목 : %s\n", getTitle() , getAuthor(), numberOfPoems);
 	}
