@@ -7,6 +7,7 @@ public class TestService {
 		
 		Animal dog = new Animal();
 		
+		
 		dog.setType("포유류");
 		dog.setName("뽀삐");
 		dog.setLeg(4);

@@ -1,39 +1,27 @@
 package test.run;
 
+import java.util.*;
+
+import test.model.vo.Animal;
+
 public class TestRun {
 	public static void main(String[] args) {
 		
-		String answer = "";
-		String letter = ".... . .-.. .-.. ---";
-        String[] morse = {".-","-...","-.-.","-..","."
-        		,"..-.","--.","....","..",".---",
-        		"-.-",".-..","--","-.","---",".--.","--.-",
-        		".-.","...","-","..-","...-",".--","-..-","-.--"
-        		,"--.."};
-
-    	String str = null;
+		int k = 1;
+		
+		int num = 29183;
+		
+		String str = "" + num;
+		
+		System.out.printf("%c\n", (char)( k + '0'));
         
-        for( int i = 0 ; i < letter.length() ; i++) {
-        	if(letter.charAt(i) != ' ') {
-        		str+= letter.charAt(i);
-        		System.out.println(str);
-        		
-        	}	else {
-        		for( int j = 0 ; j < morse.length ; j++ ) {
-        			if(str.equals(morse[j])) {
-        				
-        				answer += (char)(i + 'a');
-        				str = null;
-        				System.out.println(i + " / " + answer);
-        				break;
-        			}
-        		}
-        	}
+        for( int i = 0; i< str.length() ; i++ ) {
+        	System.out.println(str);
+            if( str.charAt(i) == (char)( k + '0')) {
+            	System.out.println(i + 1);
+            }
         }
-        
-        str = "....";
-        System.out.println(str.equals(morse[4]));
-        System.out.println(morse[8]);
-        System.out.println(answer);
+        System.out.println("-1");
+		
 	}
 }

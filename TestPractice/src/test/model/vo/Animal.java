@@ -54,6 +54,10 @@ public class Animal {
 		}
 	}
 	
+	public static void print() {
+		System.out.println("시험");
+	}
+	
 	
 	
 }
