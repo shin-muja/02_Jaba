@@ -175,10 +175,13 @@ case 'a' : case 'g' : case 'd' - JDK 버전 11이전
 case 'a', 'g', 'd' - JDK버전 12이상
 
 
+**List<E> list = null;**
+E : 제네릭, 들어올 객체타입을 제한
+list.add(값); 을 실행시 nullPointError 런타임 에러 발생
 
+list의 크기를 따질때 size()메서드 length() 아님
 
-
-
+toString 영상 참조
 
 
 

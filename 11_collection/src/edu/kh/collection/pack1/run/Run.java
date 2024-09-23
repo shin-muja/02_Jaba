@@ -11,6 +11,7 @@ public class Run {
 		StudentService service = new StudentService();
 		
 		service.displayMenu();
+		
 		/*List<Integer> numberList = new ArrayList<Integer>();
 		
 		numberList.add(5);
@@ -21,6 +22,7 @@ public class Run {
 		
 		// 숫자 리스트를 정렬 (Comparable이 이미 구현되어 있음)
 		Collections.sort(numberList);
+		//Collections.reverse(numberList);
 		
 		System.out.println(numberList);*/
 	}
