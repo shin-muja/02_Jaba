@@ -10,7 +10,7 @@ public class Toy {
 	private int price; // 가격
 	private String color; // 색상
 	private String manufactureDate; // 제조일(문자열로 표현 - 20240222)
-	private Set<String> materials = new HashSet<String>();; // 재료 (중복되지 않는 값으로 저장)
+	private Set<String> materials = new HashSet<String>(); // 재료 (중복되지 않는 값으로 저장)
 	
 	public Toy() {
 		// TODO Auto-generated constructor stub
@@ -76,8 +76,8 @@ public class Toy {
 
 	@Override
 	public String toString() {
-		return "Toy [name=" + name + ", age=" + age + ", price=" + price + ", color=" + color + ", manufactureDate="
-				+ manufactureDate + ", materials=" + materials + "]";
+		return String.format("이름 : %s / 가격 : %d / 색상 : %s / 사용가능연령 : %d / 제조년월일 : %s / 재료 : %s", 
+				name, price, color, age, manufactureDate, printMaterial(materials));
 	}
 
 	@Override
@@ -97,6 +97,18 @@ public class Toy {
 		return age == other.age && Objects.equals(color, other.color)
 				&& Objects.equals(manufactureDate, other.manufactureDate) && Objects.equals(materials, other.materials)
 				&& Objects.equals(name, other.name) && price == other.price;
+	}
+	
+	public String printMaterial(Set<String> material) {
+		int i = 0;
+		String str = "";
+		for(String mate: material) {
+			if( i > 0) str += ", ";
+			else i++;
+			
+			str += mate;
+		}
+		return str;
 	}
 	
 	
