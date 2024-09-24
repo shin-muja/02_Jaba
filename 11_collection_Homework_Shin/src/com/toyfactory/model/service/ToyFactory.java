@@ -1,6 +1,9 @@
 package com.toyfactory.model.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.InputMismatchException;
@@ -50,6 +53,7 @@ public class ToyFactory {
 				System.out.println("5. 연령별 사용가능한 장난감 리스트 조회하기");
 				System.out.println("6. 재료 추가");
 				System.out.println("7. 재료 제거");
+				System.out.println("0. 종료");
 			
 			
 				System.out.print("선택 : ");
@@ -62,10 +66,10 @@ public class ToyFactory {
 				case 1 : printToy(); break;
 				case 2 : addToy(); break;
 				case 3 : deleteToy(); break;
-				case 4 : break;
-				case 5 : break;
-				case 6 : break;
-				case 7 : break;
+				case 4 : manufacturingSearch(); break;
+				case 5 : ageToy(); break;
+				case 6 : addMaterial(); break;
+				case 7 : deleteMaterial(); break;
 				case 0 : System.out.println("종료합니다"); return;
 				default : System.out.println("선택지 외에 수를 입력하셨습니다.\n다시 입력해주세요");
 				}
@@ -112,6 +116,10 @@ public class ToyFactory {
 		
 		System.out.print("제조일 (YYYYMMDD형식으로 입력) : ");
 		String manufactureDate = sc.next();
+		if(!intDistinguish(manufactureDate)) {
+			System.out.println("숫자가 아닌 문자가 껴있습니다 다시 입력해주세요");
+			return;
+		}
 		
 		System.out.println("사용 가능한 재료 목록 : ");
 		
@@ -152,12 +160,93 @@ public class ToyFactory {
 	}
 	
 	public void deleteToy() {
-		System.out.println("삭제할 장난감의 이름을 입력해주세요 : ");
+		System.out.print("삭제할 장난감의 이름을 입력해주세요 : ");
 		String name = sc.next();
 		
+		for( Toy toy : toySet) {
+			if(toy.getName().equals(name)) {
+				
+				toySet.remove(toy);
+				System.out.println(name + "의 이름을 가진 장난감이 목록에서 삭제되었습니다.");
+				return;
+			}
+		}
+		
+		System.out.println("일치하는 장난감이 없습니다.");
 	}
 	
+	public void manufacturingSearch() {
+		List<Toy> toyList = new ArrayList<>();
+		
+		for( Toy toy : toySet) {
+			toyList.add(toy);
+		}
+		
+		Comparator<Toy> comparator = Comparator.comparing(Toy::getManufactureDate);
+		Collections.sort(toyList ,comparator);
+		
+		for(Toy toy : toyList) {
+			System.out.println(toy);
+		}
+	}
 	
+	public void ageToy() {
+		System.out.print("검색할 나이를 입력하세요 : ");
+		int age = sc.nextInt();
+		
+		for( Toy toy : toySet) {
+			if(toy.getAge() == age) System.out.println(toy);
+		}
+	}
+	
+	public void addMaterial() throws InputMismatchException{ 
+		int number = 0;
+		String name = "";
+		
+		while(true) {
+			
+			System.out.print("추가할 재료의 번호를 입력해주세요 : ");
+			number = sc.nextInt();
+			sc.nextLine();
+			
+			if( materialMap.containsKey(number) ) {
+				System.out.println("중복되는 번호가 존재합니다. 다시 입력해주세요.");
+			} else {
+				break;
+			}
+		} 
+		
+		while (true) {
+			
+			System.out.print("추가할 재료의 이름을 입력해주세요 : ");
+			name = sc.next();
+			sc.nextLine();
+			
+			if( materialMap.containsValue(name)) {
+				System.out.println("중복되는 이름이 존재합니다. 다시 입력해주세요.");
+			} else {
+				break;
+			}
+		}
+		System.out.println("성공적으로 추가했습니다.");
+		materialMap.put(number, name);
+	}
+	
+	public void deleteMaterial() {
+		
+		while(true) {
+			System.out.print("삭제할 재료의 번호를 입력해주세요 : ");
+			int number = sc.nextInt();
+			
+			if( materialMap.containsKey(number)) {
+				String str = materialMap.remove(number);
+				System.out.println(number + " : " + str + " 재료가 삭제되었습니다");
+				return;
+			} else {
+				System.out.println("해당 번호는 존재하지 않습니다.");
+			}
+		}
+	}
 	
 	
 	
