@@ -8,9 +8,7 @@ public class Member {
 	private String pw;
 	private int age;
 	
-	public Member() {
-		// TODO Auto-generated constructor stub
-	}
+	public Member() {}
 
 	public Member(String id, String pw, int age) {
 		super();
@@ -18,7 +16,6 @@ public class Member {
 		this.pw = pw;
 		this.age = age;
 	}
-
 
 	public String getId() {
 		return id;
@@ -43,6 +40,13 @@ public class Member {
 	public void setAge(int age) {
 		this.age = age;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", pw=" + pw + ", age=" + age + "]";
+	}
 
 	@Override
 	public int hashCode() {
@@ -61,11 +65,13 @@ public class Member {
 		return age == other.age && Objects.equals(id, other.id) && Objects.equals(pw, other.pw);
 	}
 	
-
-	@Override
-	public String toString() {
-		return "Memeber [id=" + id + ", pw=" + pw + ", age=" + age + "]";
-	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
