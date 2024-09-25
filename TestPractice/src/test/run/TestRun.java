@@ -7,21 +7,41 @@ import test.model.vo.Animal;
 public class TestRun {
 	public static void main(String[] args) {
 		
-		int k = 1;
+		int[] array = {0, 11, 12};
 		
-		int num = 29183;
+		int n = 11;
 		
-		String str = "" + num;
-		
-		System.out.printf("%c\n", (char)( k + '0'));
+		int min = array[0] - n;
         
-        for( int i = 0; i< str.length() ; i++ ) {
-        	System.out.println(str);
-            if( str.charAt(i) == (char)( k + '0')) {
-            	System.out.println(i + 1);
+        if(min < 0) min *= -1;
+        
+        for(int i = 0 ; i < array.length ; i++ ) {
+
+            if ( array[i] == n ) {
+            	System.out.println(array[i]);
             }
+            
+            int x = array[i] - n;
+            
+            if(x < 0) x *= -1;
+            
+            if( min > x) min = x;
+        
         }
-        System.out.println("-1");
+        
+        for( int i = 0; i < array.length ; i++ ) {
+            int x = array[i] - n;
+            
+            if(x < 0) x *= -1;
+            
+            if( min == x) {
+            	System.out.println(array[i]); ;
+            }
+            
+        }
+	
+		
+		System.out.println("못찾음");
 		
 	}
 }

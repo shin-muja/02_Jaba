@@ -62,7 +62,7 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return String.format("%d번 도서 : [도서과목 : %s / 도서저자 : %s / 도서가격 : %d원 / 출판사 : %s]", bookNumber, name, author, price, publisher);
+		return String.format("%d번 도서 : [도서제목 : %s / 도서저자 : %s / 도서가격 : %d원 / 출판사 : %s]", bookNumber, name, author, price, publisher);
 	}
 	
 	

@@ -1,8 +1,6 @@
 package com.toyfactory.model.dto;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Toy {
 	private String name; // 장난감 이름
@@ -73,11 +71,43 @@ public class Toy {
 	public void setMaterials(Set<String> materials) {
 		this.materials = materials;
 	}
-
+	
+	/** 아래 toString() 에서 재료명 표기 시 사용함
+	 * materials 안에 있는 모든 재료를 문자열 형태로 만들어 반환하는 메서드
+	 * @return
+	 */
+	public String getMaterialAsString () {
+		int i = 0;
+		
+		StringBuilder str = new StringBuilder(); // 가변 문자열 객체(비동기)
+		
+		if(materials.size() == 0) {
+			return "재료 없음";
+		}
+		
+		// 재료가 있다면 materials 순회하면서 재료 하나하나 , 로 구분하여 문자열 만들기
+		for(String material: materials) {
+			str.append(material).append(", ");
+			/*
+			if( i > 0) str.append(", "); 
+			else i++;
+			
+			str.append(material);
+			*/
+		}
+		
+		// ex) "고무, 면직물, "
+		// 만들어진 문자열의 마지막 쉼표와 공백 제거하기
+		// String.setLength : 길이만큰 재구성 적으면 뒤에 문자들 추가 안함
+		str.setLength(str.length() - 2);
+		
+		return str.toString();
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("이름 : %s / 가격 : %d / 색상 : %s / 사용가능연령 : %d / 제조년월일 : %s / 재료 : %s", 
-				name, price, color, age, manufactureDate, printMaterial(materials));
+				name, price, color, age, manufactureDate, getMaterialAsString());
 	}
 
 	@Override
@@ -98,20 +128,6 @@ public class Toy {
 				&& Objects.equals(manufactureDate, other.manufactureDate) && Objects.equals(materials, other.materials)
 				&& Objects.equals(name, other.name) && price == other.price;
 	}
-	
-	public String printMaterial(Set<String> material) {
-		int i = 0;
-		String str = "";
-		for(String mate: material) {
-			if( i > 0) str += ", ";
-			else i++;
-			
-			str += mate;
-		}
-		return str;
-	}
-	
-	
 	
 	
 }

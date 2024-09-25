@@ -46,12 +46,12 @@ public class BookService {
 				
 				switch( input ) {
 				case 1: addBook(); break;
-				case 2: checkBookList(); break;
+				case 2: checkBookList(bookList); break;
 				case 3: confidBook(); break;
 				case 4: deleteBook(); break;
 				case 5: addFavorites(); break;
 				case 6: deleteFavorites(); break;
-				case 7: checkFavorites(); break;
+				case 7: checkBookList(favoritesBookList); break;
 				case 8: recommendBook(); break;
 				case 0: System.out.println("시스템을 종료합니다"); return;
 				
@@ -65,6 +65,7 @@ public class BookService {
 	}
 	
 	public void addBook() {
+		
 		System.out.println("==============도서 등록==============");
 		System.out.print("도서 번호 : ");
 		int number = sc.nextInt();
@@ -90,7 +91,6 @@ public class BookService {
 		System.out.print("도서 출판사 : ");
 		String publisher = sc.nextLine();
 		
-		
 		bookList.add(new Book(number, name, author, price, publisher));
 		
 		BookCompar(bookList);
@@ -100,20 +100,86 @@ public class BookService {
 		System.out.println();
 	}
 	
-	public void checkBookList() {
+	/** 도서 목록 조회용 메서드
+	 * @param List<Book>
+	 */
+	public void checkBookList(List<Book> list) {
+		
+		if( list.isEmpty()) {
+			System.out.println("등록된 도서가 없습니다. 도서를 등록해주세요!");
+			return;
+		}
+		
 		System.out.println();
-		for(Book book : bookList) {
-			System.out.println(book);
+		// list를 순회하면서 각 Book 객체를 출력
+		for(Book book : list) {
+			System.out.println(book); // book.toString();
 		}
 		System.out.println();
 	}
 	
 	public void confidBook() {
+		
+		checkBookList(bookList); // 등록된 도서를 출력하기
+		
 		System.out.println("=========도서 정보 수정=========");
 		System.out.print("수정할 도서 번호를입력하세요 : ");
 		int number = sc.nextInt();
 		sc.nextLine();
 		
+		// 강사님 답안
+		int editMenu =0;
+		boolean flag = true;
+		
+		for( Book book : bookList) {
+			if( book.getBookNumber() == number) {
+				// 입력한 도서번호와 도서 목록의 도서 번호가 일치하는걸 찾았을때
+				flag = false;
+				
+				System.out.println();
+				System.out.println("1. 도서명");
+				System.out.println("2. 도서 저자");
+				System.out.println("3. 도서 가격");
+				System.out.println("4. 도서 출판사");
+				System.out.println("0. 수정종료");
+				
+				editMenu = sc.nextInt();
+				sc.nextLine();
+				
+				switch(editMenu) {
+				case 1: System.out.println("==========도서명 수정==========");
+						System.out.print("수정할 책의 제목을 입력하세요 : ");
+						String name = sc.nextLine();
+						book.setName(name);
+				case 2:	System.out.println("==========도서 저자 수정==========");
+						System.out.print("수정할 책의 저자을 입력하세요 : ");
+						String author = sc.nextLine();
+						book.setAuthor(author);
+				case 3:	System.out.println("==========도서 가격 수정==========");
+						System.out.print("수정할 책의 가격을 입력하세요 : ");
+						int price = sc.nextInt();
+						sc.nextLine();
+						book.setPrice(price);
+				case 4:	System.out.println("==========도서 출판사 수정==========");
+						System.out.print("수정할 책의 출판사를 입력하세요 : ");
+						String publisher = sc.nextLine();
+						book.setPublisher(publisher);
+				case 0: System.out.println(); break;
+				default : System.out.println("메뉴에 있는 번호만 선택하세요"); break;
+				}
+				
+				break;
+			}
+		}
+		
+		if( flag ) {
+			System.out.println("일치하는 도서 번호가 없습니다");
+			return;
+		}
+		
+		System.out.println("수정 완료");
+		
+		/* 내가한 코드
 		for(Book book : bookList) {
 			if(book.getBookNumber() == number) {
 				System.out.println();
@@ -159,18 +225,41 @@ public class BookService {
 				}
 			}
 		}
+		*/
 	}
 	
+	
+	/** 도서 삭제용 메서드
+	 * 
+	 */
 	public void deleteBook() {
 		System.out.println("=========도서 삭제=========");
+		
+		checkBookList(bookList);
+		
 		System.out.print("삭제할 도서 번호를 입력해주세요 : ");
 		int number = sc.nextInt();
 		
 		for( Book book : bookList) {
 			if(book.getBookNumber() == number) {
-				bookList.remove(book);
-				System.out.println("성공적으로 삭제되었습니다.");
-				return;
+				/* int index = library.indexOf(book);
+				 * int List.indexOf(Object) : List에 일치하는 객체가 있으면 그 객체가 있는 index번호 반환
+				 */
+				
+				System.out.print("정말 삭제하시겠습니까? (Y/N) : ");
+				char answer = sc.next().toUpperCase().charAt(0);
+				
+				if( answer == 'N') {
+					System.out.println("삭제를 진행하지 않습니다.");
+					return;
+				}
+				
+				if( answer == 'Y') {
+					// bookList.remove(index);
+					bookList.remove(book);
+					System.out.println("성공적으로 삭제되었습니다.");
+					return;
+				}
 			}
 		}
 		
@@ -224,20 +313,12 @@ public class BookService {
 		System.out.println("일치하는 도서 번호가 없습니다.");
 	}
 	
-	public void checkFavorites() {
-		System.out.println();
-		for( Book book : favoritesBookList) {
-			System.out.println(book);
-		}
-		System.out.println();
-	}
-	
 	public void recommendBook() {
 		Random random = new Random();
 		
 		System.out.println();
 		System.out.println("*********추천도서***********");
-		System.out.println(bookList.get(random.nextInt(bookList.size())));
+		System.out.println("추천 도서명 : " + bookList.get(random.nextInt(bookList.size())).getName());
 		System.out.println();
 		
 	}

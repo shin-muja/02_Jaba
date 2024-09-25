@@ -183,8 +183,40 @@ list의 크기를 따질때 size()메서드 length() 아님
 
 toString 영상 참조
 
+new 연산자 없이 add() put()연산자 사용 불가능 이유는 참조할 Heap영역에 주소가 없는 null인 상태라 그럼
+
+** 리스트나 set 정렬
+Comparator<E> comparator = Comparator.comparing(E::getter);
+Collections.sort(정렬할 목록, comparator);
 
 
 
+
+List 
+remove(int index) :
+intdex 번호를 알아야 지울 수 있다. (단점)
+인덱스번호를 알기 때문에 정호가한 요소를 지정하여 삭제가능
+
+remove(Object o) :
+인덱스 번호를 모를때 사용
+- 리스트는 중복 요소 허용
+- 중복된 요소가 있는 경우 처음 발견한 요소 하나만 제거
+이런 차이 때문에 되도록 index번호를 이용해서 삭제 이용
+
+List<Integer> list = new ArrayList<Integer>();
+
+list.add(1); // 0
+list.add(2); // 1
+list.add(3); // 2
+
+list.remove(1); // 인덱스 1에 있는 요소를 제거 즉 2를 제거
+
+객체 1을 제거하고 싶으면
+remove(Object o)
+list.remove(Integer.valueOf(1));
+// 인덱스 0에 담긴 1을 삭제
+
+
+이런 차이와 모호함 속 오는 혼동 때문에 되도록 index번호를 이용해서 삭제 이용
 
 

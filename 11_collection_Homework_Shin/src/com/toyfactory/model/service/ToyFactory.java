@@ -1,18 +1,7 @@
 package com.toyfactory.model.service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.Set;
 
 import com.toyfactory.model.dto.Toy;
 
@@ -21,26 +10,33 @@ public class ToyFactory {
 	private Set<Toy> toySet = new HashSet<Toy>();
 	private Map<Integer,String> materialMap = new HashMap<Integer, String>();
 	
-	public ToyFactory() {
+	public ToyFactory() { // 기본생성자
 		// TODO Auto-generated constructor stub
 		materialMap.put(1, "면직물");
 		materialMap.put(2, "플라스틱");
 		materialMap.put(3, "유리");
 		materialMap.put(4, "고무");
 		
+		// 1. 일반 배열 사용
+		// materials(new int[] {1,4})));
 		
+		// 2-1. List.of() 사용 java version9 이상
+		// materials(List.of(1, 4))));
 		
+		// 2-2. List.of() 사용 java version8 이하
+		// materials(Arrays.asList(1, 4))));
 		
-		toySet.add(new Toy("마미롱레그", 8, 36000, "분홍색", "19950805", materials(1, 4, 4)));
-		toySet.add(new Toy("허기워기", 5, 12000, "파란색", "19940312", materials(1, 2)));
-		toySet.add(new Toy("키시미시", 5, 15000, "분홍색", "19940505", materials(1, 2)));
-		toySet.add(new Toy("캣냅", 8, 27000, "보라색", "19960128", materials(1, 2, 2, 2)));
-		toySet.add(new Toy("파피", 12, 57000, "빨간색", "19931225", materials(1, 2, 4)));
+		// 3. 가변인자 사용
+		// materials(1, 4)));
+		
+		toySet.add(new Toy("마미롱레그", 8, 36000, "분홍색", "19950805", materials(List.of(1, 4))));
+		toySet.add(new Toy("허기워기", 5, 12000, "파란색", "19940312", materials(List.of(1, 4))));
+		toySet.add(new Toy("키시미시", 5, 15000, "분홍색", "19940505", materials(List.of(1, 4))));
+		toySet.add(new Toy("캣냅", 8, 27000, "보라색", "19960128", materials(List.of(1, 4))));
+		toySet.add(new Toy("파피", 12, 57000, "빨간색", "19931225", materials(List.of(1, 2, 4))));
 	}
 	
 	public void displayMenu() {
-
-		
 		
 		
 		try {
@@ -80,27 +76,37 @@ public class ToyFactory {
 			System.out.println("제대로 입력해주세요.");
 		} catch (NumberFormatException e) {
 			System.out.println("q를 입력해주세요");
+		} catch (Exception e) {
+			System.out.println("예외 발생");
+			e.printStackTrace(); // 예외추척
 		}
 	}
 	
-	
 	public void printToy() {
+		System.out.println("<전체 장난감 목록>");
+		
+		int index = 1;
 		for(Toy toy : toySet) {
-			System.out.println(toy);
+			System.out.println(index++ + ". " + toy);
 		}
 		
 		System.out.println();
 	}
 	
-	public void addToy() throws NumberFormatException {
+	/** 새로운 장난감 만들기
+	 * @throws NumberFormatException
+	 */
+	public void addToy() throws Exception {
 		System.out.print("장난감 이름 : ");
 		String name = sc.nextLine();
 		
-		
+		// 장난감 이름 입력받음
+		// -> 이미 존재하는 장난감인지 이름으로 확인
 		
 		for( Toy toy : toySet) {
 			if( toy.getName().equals(name)) {
 				System.out.println("일치하는 이름이 있습니다.");
+				System.out.println(toy);
 				System.out.println();
 				return;
 			}
@@ -110,12 +116,14 @@ public class ToyFactory {
 		
 		System.out.print("가격 : ");
 		int price = sc.nextInt();
+		sc.nextLine();
 		
 		System.out.print("색깔 : ");
 		String color = sc.next();
 		
 		System.out.print("제조일 (YYYYMMDD형식으로 입력) : ");
 		String manufactureDate = sc.next();
+		
 		if(!intDistinguish(manufactureDate)) {
 			System.out.println("숫자가 아닌 문자가 껴있습니다 다시 입력해주세요");
 			return;
@@ -124,9 +132,14 @@ public class ToyFactory {
 		System.out.println("사용 가능한 재료 목록 : ");
 		
 		for(Entry<Integer, String> entry : materialMap.entrySet()) {
+			// Set<Entry<K, V>> Map.enatrySet() : key = value 한 쌍으로 이루어진 Entry객체를
+			// Set 객체로 반환
+			// Entry.getKey() : Entry 객체의 key 반환
+			// Entry.getValue() : Entry 객체의 value 반환
 			System.out.println(entry.getKey() + " : " + entry.getValue());
 		}
 
+		
 		List<Integer> list = new ArrayList<>();
 		
 		while(true) {
@@ -145,7 +158,8 @@ public class ToyFactory {
 			} else if(input.equals("q")) {
 				System.out.println("새로운 장난감이 추가되었습니다!");
 				toySet.add(new Toy(name, age, price, color, manufactureDate, materials(list)));
-				break;	
+				System.out.println();
+				return;	
 			} else if(!materialMap.containsKey(inputNum)) {
 				System.out.println("잘못된 번호입니다. 다시 입력해주세요");
 			} else if ( list.contains(inputNum)){
@@ -156,7 +170,6 @@ public class ToyFactory {
 			}
 		}
 		
-		System.out.println();
 	}
 	
 	public void deleteToy() {
@@ -165,9 +178,10 @@ public class ToyFactory {
 		
 		for( Toy toy : toySet) {
 			if(toy.getName().equals(name)) {
-				
 				toySet.remove(toy);
-				System.out.println(name + "의 이름을 가진 장난감이 목록에서 삭제되었습니다.");
+				// 향상된 for문에서 Collection 이용 시 컬렉션 객체가 변화가 발생 시
+				// Runtime 에러 발생 그렇기에 break나 return으로 종료를 시켜야 한다.
+				System.out.println(name + " 장난감이 목록에서 삭제되었습니다.");
 				return;
 			}
 		}
@@ -176,60 +190,108 @@ public class ToyFactory {
 	}
 	
 	public void manufacturingSearch() {
-		List<Toy> toyList = new ArrayList<>();
 		
-		for( Toy toy : toySet) {
-			toyList.add(toy);
-		}
-		
+		List<Toy> toyList = new ArrayList<>(toySet);
+		/*
 		Comparator<Toy> comparator = Comparator.comparing(Toy::getManufactureDate);
 		Collections.sort(toyList ,comparator);
+		*/
+		
+		toyList.sort(Comparator.comparing(Toy::getManufactureDate));
+		
+		int index = 1;
 		
 		for(Toy toy : toyList) {
-			System.out.println(toy);
+			System.out.println(index++ + " : " + toy);
 		}
 	}
 	
 	public void ageToy() {
+		/*
 		System.out.print("검색할 나이를 입력하세요 : ");
 		int age = sc.nextInt();
 		
 		for( Toy toy : toySet) {
 			if(toy.getAge() == age) System.out.println(toy);
 		}
+		*/
+		System.out.println("<연령별로 사용 가능한 장난감>");
+		System.out.println();
+		
+		Map<Integer, List<Toy>> ageMap = new HashMap<Integer, List<Toy>>();
+		//toysByAge라는 이름의 새로운 Map을 생성
+		// -> 연령을 ektfh 지정하고, 해당 연령을 가진 장난감 List를 value로 가짐
+		
+		for( Toy toy : toySet) {
+			
+			int age = toy.getAge(); // 현재 toy객체가 가진 나이 얻어오기
+			
+			ageMap.putIfAbsent(age, new ArrayList<Toy>());
+			// putIfAbsent() : Map에서 제공하늠 메서드로,
+			// 해다 키가 존재하지 않는 경우에만 전달받은 값을 추가함.
+			// -> Map에 해당 연령의 리스트가 없는 경우에만 새로운 리스트를 생성하여 추가
+			
+			ageMap.get(age).add(toy);
+			// ageMap.get(age) -> age(K)에 맞는 Value 반환 -> List
+			// List.add(toy) -> 전달된 toy객체를 List에 추가
+		}
+		
+		
+		for( Entry<Integer, List<Toy>> entry : ageMap.entrySet()) {
+			
+			int age = entry.getKey();// 해당 entry의 key(나이)를 얻어옴
+			List<Toy> toyList = entry.getValue(); // 해당 entry의 value를 얻어옴
+			System.out.println("[연령 : " + age + "세]");
+			
+			int index = 1;
+			
+			for(Toy toy : toyList) {
+				System.out.println(index++ + ". " + toy);
+			}
+			System.out.println();
+			
+		}
+		
 	}
 	
-	public void addMaterial() throws InputMismatchException{ 
-		int number = 0;
+	/** 재료 추가하기
+	 * @throws Exception
+	 */
+	public void addMaterial() throws Exception{ 
+		
+		System.out.println("<재료 추가>");
+		System.out.println("---현재 등록된 재료---");
+		
+		for(Entry<Integer,String> entry : materialMap.entrySet()) {
+			System.out.println(entry.getKey() + " : " + entry.getValue());
+		}
+		
+		System.out.println("-----------------------------------");
+		
+		
 		String name = "";
 		
-		while(true) {
-			
-			System.out.print("추가할 재료의 번호를 입력해주세요 : ");
-			number = sc.nextInt();
-			sc.nextLine();
-			
-			if( materialMap.containsKey(number) ) {
-				System.out.println("중복되는 번호가 존재합니다. 다시 입력해주세요.");
-			} else {
-				break;
-			}
-		} 
+		System.out.println("재료 번호 입력 : ");
+		int number = sc.nextInt();
 		
-		while (true) {
+		if(materialMap.containsKey(number)) {
+			System.out.println("이미 해당키에 재료가 등록되어 있습니다.");
+			System.out.println("덮어쓰겠습니까 ? (Y/N) : ");
+			String input = sc.next();
 			
-			System.out.print("추가할 재료의 이름을 입력해주세요 : ");
-			name = sc.next();
-			sc.nextLine();
-			
-			if( materialMap.containsValue(name)) {
-				System.out.println("중복되는 이름이 존재합니다. 다시 입력해주세요.");
+			if(input.equalsIgnoreCase("Y")) {
+				// equalsIgnoreCase : 대문자인지 소문자인지 구분하지 않고 문자열 값 자체만 비교
+				materialMap.put(number, name); // 같은 key로 추가 시 value 덮어쓰기함
 			} else {
-				break;
+				System.out.println("재료 추가가 취소되었습니다.");
 			}
+		} else {
+
+			materialMap.put(number, name);
+			System.out.println("성공적으로 추가했습니다.");
 		}
-		System.out.println("성공적으로 추가했습니다.");
-		materialMap.put(number, name);
+		
+		
 	}
 	
 	public void deleteMaterial() {
@@ -249,25 +311,40 @@ public class ToyFactory {
 	}
 	
 	
-	
+	/** 매게변수로 전달받은 값들을 Set 형태로 반환하는 메서드
+	 * 재료저장 Map에 있는지 확인하고
+	 * Set형태로 반환하는 메서드
+	 * 
+	 * 가변인자 작성법 : 자료형... 변수명
+	 * -> 매개변수의 수가 정확히 몇개인지 특정할 수 없을 때 사용
+	 * @param numbers
+	 * @return
+	 */
 	public Set<String> materials(List<Integer> numbers) {
-		Set<String> meterial = new HashSet<String>();
+		//1. 배열 매개변수 : int[] numbers
+		//2. List 매개변수 : List<Integer> numbers
+		//3. 가변 매개변수 : Integer... numbers
 		
-		for(int num : numbers) {
-			meterial.add(materialMap.get(num));
+		// 매개변수로 전달받은 재료를 저장하여 반활할 Set 객체를 생성
+		Set<String> material = new HashSet<String>();
+		
+		for(Integer materialKey : numbers) {
+			
+			// Map에서 재료 고유 번호(Key)에 대응하는 재료명(value)을 가져와서
+			// material에 추가
+			
+			String materialValue = materialMap.get(materialKey);
+			
+			// map에 없는 key를 입력하여value를 얻어왔을 때 == null
+			
+			if(materialValue != null) { // 재료 목록에 있을 때
+				material.add(materialValue);
+			}
+		
+			// material.add(materialMap.get(materialKey));
 		}
 		
-		return meterial;
-	}
-
-	public Set<String> materials(int... numbers) {
-		Set<String> meterial = new HashSet<String>();
-		
-		for(int num : numbers) {
-			meterial.add(materialMap.get(num));
-		}
-		
-		return meterial;
+		return material;
 	}
 	
 	@Override
@@ -285,7 +362,9 @@ public class ToyFactory {
 			return false;
 		ToyFactory other = (ToyFactory) obj;
 		return Objects.equals(toySet, other.toySet);
-	}public boolean intDistinguish(String str)  {
+	}
+	
+	public boolean intDistinguish(String str)  {
 		for( int i = 0 ; i < str.length() ; i++ ) {
 			if( !Character.isDigit(str.charAt(i))) {
 				return false;

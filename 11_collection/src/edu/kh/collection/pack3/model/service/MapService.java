@@ -79,7 +79,8 @@ public class MapService {
 		// map.put("age", 25);
 		// -> map.put("age", Integer.valueOf(25));
 		
-		// Auto UnBoxing  :  Wrapper클래스인 객체를 기본 자료형 데이터로 자동 변환
+		// Auto UnBoxing  :
+		// Wrapper클래스인 객체를 기본 자료형 데이터로 자동 변환
 		// int num = Integer.valueOf(100);
 		
 		// 값출력
