@@ -220,7 +220,7 @@ public class ToyFactory {
 		
 		Map<Integer, List<Toy>> ageMap = new HashMap<Integer, List<Toy>>();
 		//toysByAge라는 이름의 새로운 Map을 생성
-		// -> 연령을 ektfh 지정하고, 해당 연령을 가진 장난감 List를 value로 가짐
+		// -> 연령을 따로 지정하고, 해당 연령을 가진 장난감 List를 value로 가짐
 		
 		for( Toy toy : toySet) {
 			
