@@ -224,3 +224,19 @@ list.remove(Integer.valueOf(1));
 스트림은 기본적으로 단방향이다 입력스트림따로 출력스트림 따로
 
 
+TCP : 신뢰적인 전송방식, 실패 시 재정송 기능 + 확인
+
+UDP: 비 신뢰적인 전송방식, 단순히 보내기만
+
+PrintWriter 객체는 .println() 메서드로 출력해야함 후에 .flush() 밀기도 해아함
+
+String serverIP = InetAddress.getLocalHost().getHostAddress();
+ "127.0.0.1" : 루프백 아이피 위와 같이 내 컴퓨터의 IP
+현재 내 컴퓨터의 주소를 얻어옴 다른 서버컴퓨터의 주소를 얻기위해서는 다른 메서드
+
+스트림 소켓 사용시 메모리 누수 방지를 위한 try catch 구분 마지막 finally 구문 속 사용한 스트림 소켓
+종료 작성해야함 close()
+
+10/4 까지 토이 프로젝트 주제 자유 레파지토리 주소 강사님에게 톡으로 보내기
+주제 : 뭔지 까지 알려주고 보내기
+CRUD 필수
