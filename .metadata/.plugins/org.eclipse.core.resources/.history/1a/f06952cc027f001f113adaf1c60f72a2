@@ -1,0 +1,29 @@
+package test.run;
+
+import java.util.*;
+
+public class TestRun {
+	public static void main(String[] args) {
+		
+		String before = "allpe";
+		String after = "apple";
+		
+		for( int i = 0 ; i < after.length() ; i++ ) {
+			for( int j = 0; j < before.length() ; j++ ) {
+				
+				if( after.charAt(j) == before.charAt(i)) {
+					after = after.replaceFirst("" + before.charAt(i), " ");
+					break;
+				}
+			}
+		}
+		
+		
+		
+		
+	
+	}
+	
+}
+
+

@@ -1,0 +1,35 @@
+package edu.kh.variable.practice;
+
+public class CastingPractice1 {
+	public static void main(String[] args) {
+		int iNumm1 = 10;
+		int iNumm2 = 4;
+		
+		float fNum = 3.0f;
+		double dNum = 2.5;
+		
+		char ch = 'A';
+		
+		System.out.println(); // 2			
+		System.out.println(); // 2
+		
+		System.out.println(); // 10.0			
+		System.out.println(); // 10.0
+		
+		System.out.println(); // 2.5			
+		System.out.println(); // 2.5
+		
+		System.out.println(); // 3	
+		System.out.println(); // 3
+		
+		System.out.println(); // 3.33333			
+		System.out.println(); // 3.333333
+		
+		System.out.println(); // 'A'	
+		System.out.println(); // 65		
+		System.out.println(); // 75		
+		System.out.println(); // 'K'		
+		
+	}
+
+}

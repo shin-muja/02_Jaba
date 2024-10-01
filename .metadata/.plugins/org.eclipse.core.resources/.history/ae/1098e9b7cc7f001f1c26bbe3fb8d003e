@@ -1,0 +1,40 @@
+package test.run;
+
+import java.util.*;
+
+public class TestRun {
+	public static void main(String[] args) {
+		
+		String polynomial = "3x + 7 + x";
+		String[] test = polynomial.split(" ");
+		
+		int total = 0;
+		int totalX = 0;
+		
+		for( int i = 0; i < test.length ; i++ ) {
+			if( test[i].contains("x")) {
+                test[i] = test[i].replace("x", "");
+				if( test[i].length() == 0){
+					totalX++;
+				} else {
+					totalX += Integer.parseInt(test[i]);
+				}
+			} else if( !test[i].equals("+") ) {
+				total = Integer.parseInt(test[i]);
+			}
+		}
+		String answer = "";
+		if( total ==0 && totalX ==0 ) return "0";
+        
+        if( totalX == 1) answer += "x";
+        else if( totalX != 0) answer += totalX + "x";
+        
+        if( total != 0 && totalX != 0) answer += " + ";
+        if( total != 0) answer += total;
+		System.out.println(answer);
+	
+	}
+	
+}
+
+

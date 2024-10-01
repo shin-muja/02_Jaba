@@ -1,0 +1,331 @@
+package com.toyfactory.model.service;
+
+import java.util.*;
+import java.util.Map.Entry;
+
+import com.toyfactory.model.dto.Toy;
+
+public class ToyFactory {
+	private Scanner sc = new Scanner(System.in);
+	private Set<Toy> toySet = new HashSet<Toy>();
+	private Map<Integer,String> materialMap = new HashMap<Integer, String>();
+	
+	public ToyFactory() { // 기본생성자
+		// TODO Auto-generated constructor stub
+		materialMap.put(1, "면직물");
+		materialMap.put(2, "플라스틱");
+		materialMap.put(3, "유리");
+		materialMap.put(4, "고무");
+		
+		// 1. 일반 배열 사용
+		// materials(new int[] {1,4})));
+		
+		// 2-1. List.of() 사용 java version9 이상
+		// materials(List.of(1, 4))));
+		
+		// 2-2. List.of() 사용 java version8 이하
+		// materials(Arrays.asList(1, 4))));
+		
+		// 3. 가변인자 사용
+		// materials(1, 4)));
+		
+		toySet.add(new Toy("마미롱레그", 8, 36000, "분홍색", "19950805", materials(List.of(1, 4))));
+		toySet.add(new Toy("허기워기", 5, 12000, "파란색", "19940312", materials(List.of(1, 4))));
+		toySet.add(new Toy("키시미시", 5, 15000, "분홍색", "19940505", materials(List.of(1, 4))));
+		toySet.add(new Toy("캣냅", 8, 27000, "보라색", "19960128", materials(List.of(1, 4))));
+		toySet.add(new Toy("파피", 12, 57000, "빨간색", "19931225", materials(List.of(1, 2, 4))));
+	}
+	
+	public void displayMenu() {
+		
+		
+		try {
+			while (true) {
+				System.out.println("<<플레이타임 공장>>");
+				System.out.println("1. 전체 장난감 조회하기");
+				System.out.println("2. 새로운 장난감 만들기");
+				System.out.println("3. 장난감 삭제하기");
+				System.out.println("4. 장난감 제조일 순으로 조회하기");
+				System.out.println("5. 연령별 사용가능한 장난감 리스트 조회하기");
+				System.out.println("6. 재료 추가");
+				System.out.println("7. 재료 제거");
+				System.out.println("0. 종료");
+			
+			
+				System.out.print("선택 : ");
+				int input = sc.nextInt();
+				sc.nextLine();
+				
+				System.out.println();
+				
+				switch ( input ) {
+				case 1 : printToy(); break;
+				case 2 : addToy(); break;
+				case 3 : deleteToy(); break;
+				case 4 : manufacturingSearch(); break;
+				case 5 : ageToy(); break;
+				case 6 : addMaterial(); break;
+				case 7 : deleteMaterial(); break;
+				case 0 : System.out.println("종료합니다"); return;
+				default : System.out.println("선택지 외에 수를 입력하셨습니다.\n다시 입력해주세요");
+				}
+				
+			}
+			
+		} catch (InputMismatchException e) {
+			System.out.println("제대로 입력해주세요.");
+		} catch (NumberFormatException e) {
+			System.out.println("q를 입력해주세요");
+		} catch (Exception e) {
+			System.out.println("예외 발생");
+			e.printStackTrace(); // 예외추척
+		}
+	}
+	
+	public void printToy() {
+		System.out.println("<전체 장난감 목록>");
+		
+		int index = 1;
+		for(Toy toy : toySet) {
+			System.out.println(index++ + ". " + toy);
+		}
+		
+		System.out.println();
+	}
+	
+	/** 새로운 장난감 만들기
+	 * @throws NumberFormatException
+	 */
+	public void addToy() throws Exception {
+		System.out.print("장난감 이름 : ");
+		String name = sc.nextLine();
+		
+		// 장난감 이름 입력받음
+		// -> 이미 존재하는 장난감인지 이름으로 확인
+		
+		for( Toy toy : toySet) {
+			if( toy.getName().equals(name)) {
+				System.out.println("일치하는 이름이 있습니다.");
+				System.out.println(toy);
+				System.out.println();
+				return;
+			}
+		}
+		System.out.print("사용 가능 연령 : ");
+		int age = sc.nextInt();
+		
+		System.out.print("가격 : ");
+		int price = sc.nextInt();
+		sc.nextLine();
+		
+		System.out.print("색깔 : ");
+		String color = sc.next();
+		
+		System.out.print("제조일 (YYYYMMDD형식으로 입력) : ");
+		String manufactureDate = sc.next();
+		
+		if(!intDistinguish(manufactureDate)) {
+			System.out.println("숫자가 아닌 문자가 껴있습니다 다시 입력해주세요");
+			return;
+		}
+		
+		System.out.println("사용 가능한 재료 목록 : ");
+		
+		for(Entry<Integer, String> entry : materialMap.entrySet()) {
+			// Set<Entry<K, V>> Map.enatrySet() : key = value 한 쌍으로 이루어진 Entry객체를
+			// Set 객체로 반환
+			// Entry.getKey() : Entry 객체의 key 반환
+			// Entry.getValue() : Entry 객체의 value 반환
+			System.out.println(entry.getKey() + " : " + entry.getValue());
+		}
+
+		
+		List<Integer> list = new ArrayList<>();
+		
+		while(true) {
+			System.out.print("추가할 재료의 번호를 입력하세요 (종료하려면 'q'를 입력하세요) : ");
+			String input = sc.next();
+			
+			int inputNum = 0;
+			
+			if( intDistinguish(input)) {
+				inputNum = Integer.parseInt(input);
+			}
+			
+			
+			if ( input.equals("q") && list.size() == 0) {
+				System.out.println("재료를 추가해주세요");
+			} else if(input.equals("q")) {
+				System.out.println("새로운 장난감이 추가되었습니다!");
+				toySet.add(new Toy(name, age, price, color, manufactureDate, materials(list)));
+				System.out.println();
+				return;	
+			} else if(!materialMap.containsKey(inputNum)) {
+				System.out.println("잘못된 번호입니다. 다시 입력해주세요");
+			} else if ( list.contains(inputNum)){
+				System.out.println("이미 추가된 재료입니다.");
+			} else {
+				list.add(inputNum);
+				System.out.println("재료가 추가되었습니다. : "  + materialMap.get(inputNum));
+			}
+		}
+		
+	}
+	
+	public void deleteToy() {
+		System.out.print("삭제할 장난감의 이름을 입력해주세요 : ");
+		String name = sc.next();
+		
+		for( Toy toy : toySet) {
+			if(toy.getName().equals(name)) {
+				toySet.remove(toy);
+				// 향상된 for문에서 Collection 이용 시 컬렉션 객체가 변화가 발생 시
+				// Runtime 에러 발생 그렇기에 break나 return으로 종료를 시켜야 한다.
+				System.out.println(name + " 장난감이 목록에서 삭제되었습니다.");
+				return;
+			}
+		}
+		
+		System.out.println("일치하는 장난감이 없습니다.");
+	}
+	
+	public void manufacturingSearch() {
+		List<Toy> toyList = new ArrayList<>();
+		
+		for( Toy toy : toySet) {
+			toyList.add(toy);
+		}
+		
+		Comparator<Toy> comparator = Comparator.comparing(Toy::getManufactureDate);
+		Collections.sort(toyList ,comparator);
+		
+		for(Toy toy : toyList) {
+			System.out.println(toy);
+		}
+	}
+	
+	public void ageToy() {
+		System.out.print("검색할 나이를 입력하세요 : ");
+		int age = sc.nextInt();
+		
+		for( Toy toy : toySet) {
+			if(toy.getAge() == age) System.out.println(toy);
+		}
+	}
+	
+	/** 재료 추가하기
+	 * @throws Exception
+	 */
+	public void addMaterial() throws Exception{ 
+		int number = 0;
+		String name = "";
+		
+		while(true) {
+			
+			System.out.print("추가할 재료의 번호를 입력해주세요 : ");
+			number = sc.nextInt();
+			sc.nextLine();
+			
+			if( materialMap.containsKey(number) ) {
+				System.out.println("중복되는 번호가 존재합니다. 다시 입력해주세요.");
+			} else {
+				break;
+			}
+		} 
+		
+		while (true) {
+			
+			System.out.print("추가할 재료의 이름을 입력해주세요 : ");
+			name = sc.next();
+			sc.nextLine();
+			
+			if( materialMap.containsValue(name)) {
+				System.out.println("중복되는 이름이 존재합니다. 다시 입력해주세요.");
+			} else {
+				break;
+			}
+		}
+		System.out.println("성공적으로 추가했습니다.");
+		materialMap.put(number, name);
+	}
+	
+	public void deleteMaterial() {
+		
+		while(true) {
+			System.out.print("삭제할 재료의 번호를 입력해주세요 : ");
+			int number = sc.nextInt();
+			
+			if( materialMap.containsKey(number)) {
+				String str = materialMap.remove(number);
+				System.out.println(number + " : " + str + " 재료가 삭제되었습니다");
+				return;
+			} else {
+				System.out.println("해당 번호는 존재하지 않습니다.");
+			}
+		}
+	}
+	
+	
+	/** 매게변수로 전달받은 값들을 Set 형태로 반환하는 메서드
+	 * 재료저장 Map에 있는지 확인하고
+	 * Set형태로 반환하는 메서드
+	 * 
+	 * 가변인자 작성법 : 자료형... 변수명
+	 * -> 매개변수의 수가 정확히 몇개인지 특정할 수 없을 때 사용
+	 * @param numbers
+	 * @return
+	 */
+	public Set<String> materials(List<Integer> numbers) {
+		//1. 배열 매개변수 : int[] numbers
+		//2. List 매개변수 : List<Integer> numbers
+		//3. 가변 매개변수 : Integer... numbers
+		
+		// 매개변수로 전달받은 재료를 저장하여 반활할 Set 객체를 생성
+		Set<String> material = new HashSet<String>();
+		
+		for(Integer materialKey : numbers) {
+			
+			// Map에서 재료 고유 번호(Key)에 대응하는 재료명(value)을 가져와서
+			// material에 추가
+			
+			String materialValue = materialMap.get(materialKey);
+			
+			// map에 없는 key를 입력하여value를 얻어왔을 때 == null
+			
+			if(materialValue != null) { // 재료 목록에 있을 때
+				material.add(materialValue);
+			}
+		
+			// material.add(materialMap.get(materialKey));
+		}
+		
+		return material;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(toySet);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ToyFactory other = (ToyFactory) obj;
+		return Objects.equals(toySet, other.toySet);
+	}
+	
+	public boolean intDistinguish(String str)  {
+		for( int i = 0 ; i < str.length() ; i++ ) {
+			if( !Character.isDigit(str.charAt(i))) {
+				return false;
+			}
+		}
+			
+		return true;
+	}
+}

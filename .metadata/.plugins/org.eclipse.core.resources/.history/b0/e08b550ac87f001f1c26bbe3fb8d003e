@@ -1,0 +1,18 @@
+package test.run;
+
+import java.util.*;
+
+public class TestRun {
+	public static void main(String[] args) {
+		
+		String polynomial = "3x + 7 + x";
+		String[] test = polynomial.split(" ");
+		
+		
+		System.out.println(Arrays.toString(test));
+	
+	}
+	
+}
+
+

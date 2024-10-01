@@ -1,0 +1,26 @@
+package test.run;
+
+import java.util.*;
+
+public class TestRun {
+	public static void main(String[] args) {
+		
+		String my_str = "abc1Addfggg4556b" ;
+		int n = 6;
+		int leng = my_str.length() % n ==0 ? my_str.length() / n : my_str.length() / n + 1;
+		String answer[] = new String[leng];
+		int index = 0;
+		
+		while ( my_str.length() > n ) {
+			answer[index++] = my_str.substring(0, n);
+			System.out.println(Arrays.toString(answer));
+		}
+		
+		System.out.println(Arrays.toString(answer));
+		
+	
+	}
+	
+}
+
+

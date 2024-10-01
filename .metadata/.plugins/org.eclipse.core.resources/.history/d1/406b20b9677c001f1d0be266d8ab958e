@@ -1,0 +1,7 @@
+package edu.kh.io.pack3.run;
+
+public class ObjectRun {
+	public static void main(String[] args) {
+		
+	}
+}

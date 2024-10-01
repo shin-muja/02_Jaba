@@ -1,0 +1,27 @@
+package test.run;
+
+import java.util.*;
+
+public class TestRun {
+	public static void main(String[] args) {
+		
+		String polynomial = "3x + 7 + x";
+		String[] test = polynomial.split(" ");
+		
+		int total
+		
+		for( int i = 0; i < test.length ; i++ ) {
+			if( test[i].contains("x")) {
+				
+			}
+			
+		}
+		
+		
+		System.out.println(Arrays.toString(test));
+	
+	}
+	
+}
+
+

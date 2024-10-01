@@ -1,0 +1,20 @@
+package test.run;
+
+import java.util.*;
+
+public class TestRun {
+	public static void main(String[] args) {
+		
+		String bin1 = "1001";
+		String bin2 = "1111";
+		
+		int test1 = Integer.parseInt(bin2, 2);
+		String test = Integer.toBinaryString(test1);
+		
+		System.out.println(Integer.toBinaryString(Integer.parseInt(bin1, 2) + Integer.parseInt(bin2, 2)));
+	
+	}
+	
+}
+
+

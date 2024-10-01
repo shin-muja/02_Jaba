@@ -1,0 +1,21 @@
+package edu.kh.io.pack3.medel.service;
+
+public class ObjectService {
+	
+	/*
+	 * ObjectInputStream / ObjectOutputStream
+	 * 
+	 * - Java 객체를 입 / 출력 할 때
+	 * 
+	 * 사용하는 바이트 기반 "보조" 스트림
+	 * (보조 스트림은 단독 사용 불가능!)
+	 * 
+	 * *** 직렬화(Serializable) ***
+	 * - 객체를 직렬(직선)형태로 변호나
+	 * 
+	 * - 직렬화 란 객체의 상태(필드 값들)를 바이트 스트림으로 변환하는 과정
+	 */
+	
+	
+	
+}

@@ -1,0 +1,13 @@
+package test.run;
+
+import java.util.*;
+
+public class TestRun {
+	public static void main(String[] args) {
+		
+		String[] dic = {"sod", "eocd", "qixm", "adio", "soo"};
+	}
+	
+}
+
+

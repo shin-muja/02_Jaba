@@ -1,0 +1,32 @@
+package edu.kh.io.pack3.medel.service;
+
+public class ObjectService {
+	
+	/*
+	 * ObjectInputStream / ObjectOutputStream
+	 * 
+	 * - Java 객체를 입 / 출력 할 때
+	 * 
+	 * 사용하는 바이트 기반 "보조" 스트림
+	 * (보조 스트림은 단독 사용 불가능!)
+	 * 
+	 * *** 직렬화(Serializable) ***
+	 * - 객체를 직렬(직선)형태로 변호나
+	 * 
+	 * - 직렬화 란 객체의 상태(필드 값들)를 바이트 스트림으로 변환하는 과정
+	 * 	이를 통해 객체는 메모리에서만 존재하는 것이 아니라, 파일로 저장되거나
+	 * 	네트워크를 통해 전송될 수 있음
+	 * 
+	 * - 역직렬화는 바이트 스트림을 다시 객체로 복원하는 과정
+	 * 즉, 저장되거나 전송된 데이터를 원래의 객체 형태로 되돌리는 작업
+	 */
+	
+	
+	/**
+	 * 객체를 외부 파일로 출력
+	 */
+	public void objectOutput() {
+		
+	}
+	
+}

@@ -1,0 +1,33 @@
+package test.run;
+
+import java.util.*;
+
+public class TestRun {
+	public static void main(String[] args) {
+		
+		int i  = 10;
+		int j = 50;
+		int k = 5;
+		
+		int answer = 0;
+		
+		while( i < j ) {
+			String str = "" + i ;
+			
+			for( int x = 0 ; x < str.length() ; x++) {
+				System.out.println(str);
+				if( str.charAt(i) == k + '0') answer++;
+			}
+			
+			i++;
+		}
+		
+		
+		System.out.println(answer);
+		
+	
+	}
+	
+}
+
+
